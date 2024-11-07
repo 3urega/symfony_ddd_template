@@ -1,0 +1,18 @@
+framework:
+  test: true
+
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+  Tests\Shared\:
+    resource: '../../../../tests/Shared/*'
+    
+  # Instance selector
+  Eurega\Shared\Domain\RandomNumberGenerator: '@App\ShoppingList\Backend\Test\ConstantRandomNumberGenerator'
+  Eurega\Shared\Domain\Repository\Usuario\UsuarioParticularWriteRepository: '@Tests\Shared\Infrastructure\Repository\MysqlUsuarioParticularWriteRepository'
+  Eurega\Shared\Domain\Repository\Usuario\UsuarioParticularReadRepository: '@Tests\Shared\Infrastructure\Repository\UsuarioParticularReadRepository'
+  Eurega\Shared\Domain\Bus\Command\CommandBusRead: '@Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusRead'
+  Eurega\Shared\Domain\Bus\Command\CommandBusWrite: '@Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusWrite'
+  Eurega\Shared\Domain\Bus\Event\EventBus: '@Eurega\Shared\Infrastructure\Bus\Event\Mysql\MySqlDoctrineEventBus'

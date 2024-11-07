@@ -1,0 +1,28 @@
+
+
+backoffice_home_get:
+  path: /
+  controller: App\Backoffice\Frontend\Controller\Home\HomeGetWebController
+  methods: [GET]
+
+crear_producto_backoffice:
+    path: /crear-producto
+    defaults: { _controller: App\Backoffice\Frontend\Controller\ProductoBackoffice\CrearProductoBackofficeController }
+    methods: [GET]
+
+crear_producto_backoffice_submit:
+    path: /crear-producto
+    controller:  App\Backoffice\Frontend\Controller\ProductoBackoffice\SubmitCrearProductoBackofficeController
+    methods: [POST]
+
+
+
+producto_backoffice_get:
+    path: /productos/main_list
+    controller: App\Backoffice\Frontend\Controller\ProductoBackoffice\ListadoPrincipalProductoBackofficeController
+    methods: [GET]
+
+backoffice_test:
+    path: /test
+    defaults: { _controller: App\Backoffice\Frontend\Controller\Test\TestController }
+    methods: [GET]

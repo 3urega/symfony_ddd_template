@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Eurega\Backoffice\Domain\Model\ProductoBackoffice\ProductoBackoffice" table="producto_backoffice">
+
+        <id name="id" type="vo_id">
+        </id>
+
+        <field name="nombre" type="vo_nombre_producto_backoffice" />
+
+        <many-to-many field="ingredientes" target-entity="Eurega\ShoppingList\Domain\Model\ProductoShoppingList\IngredienteModel">
+            <join-table name="producto_backoffice_ingrediente">
+            </join-table>
+        </many-to-many>
+
+    </entity>
+
+</doctrine-mapping>

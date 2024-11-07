@@ -1,0 +1,74 @@
+{% extends '@backoffice/base.twig' %}
+
+{% block title %}Products{% endblock %}
+{% block pageTitle %}Product list{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('styles/vendor/select2') }}
+    {{ encore_entry_link_tags('styles/vendor/dataTablesBs4') }}
+    {{ parent() }}
+{% endblock %}
+
+{% block main %} 
+    <div class="row">
+        <div class="col">
+            {% embed "@backoffice/embed/card.twig" %}
+                {% block cardBody %}
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-md-4 col-xl-3">
+                                    <div class="form-group">
+                                        <input type="checkbox" id="pendents">
+                                        <label for="pendents">&nbsp;Veure només pendents</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 col-xl-3">
+                                    <div class="form-group">
+                                        <label for="buscar_nombre">Buscar por nombre.</label>
+                                        <input type="text" class="form-control" id="buscar_nombre">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col table-responsive">
+                            <table id="productos_table" class="table w-100 table-hover text-nowrap dataTable">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Nombre</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}
+
+{# 
+config.editar_producto = {
+            url: '{{ path('ui_admin_editar_producto', { 'id': 'id_producto' }) }}'
+        } 
+#}
+
+
+{% block bottomJavascripts %}
+    <script>
+        config.listado = {
+            url: '{{ path('backoffice_listado_productos_backoffice_ajax') }}'
+        }
+        
+        
+        
+    </script>
+    {{ encore_entry_script_tags('js/producto-backoffice/listado/index') }}
+{% endblock %}

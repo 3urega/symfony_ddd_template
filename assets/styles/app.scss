@@ -1,0 +1,117 @@
+@use 'sass:color';
+
+/** Custom colors **/
+$primary: #298ccf;
+$secondary: #f0b026;
+$success: #76C556;
+$light: #f1f1f1;
+$dark: #383838;
+$white: #fff;
+
+@import '~admin-lte/dist/css/adminlte.css';
+
+/** Custom styles **/
+
+.transportista-albara-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.box-full-width {
+  width: 100%;
+}
+//Header
+.main-header {
+    background-color: #eee !important;
+}
+
+//Sidebar
+.main-sidebar {
+    box-shadow: none !important;
+    background-color: $dark !important;
+}
+
+
+
+.content-wrapper {
+    background-color: white !important;
+}
+
+[class*=sidebar-dark-] .nav-sidebar {
+    padding-top: 50px !important;
+
+    .nav-item {
+        border-bottom: solid 1px white;
+    }
+}
+
+.brand-link {
+    background-color: #eee !important;
+}
+
+[class*=sidebar-dark-] .nav-sidebar > .nav-item.menu-open > .nav-link,
+[class*=sidebar-dark-] .nav-sidebar > .nav-item:hover > .nav-link,
+[class*=sidebar-dark-] .nav-sidebar > .nav-item > .nav-link:focus {
+  background-color: color.adjust($dark, $lightness: 10%);
+}
+
+[class*=sidebar-dark-] .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: $primary;
+  
+      &:hover,&:focus {
+          background-color: color.adjust($primary, $lightness: -10%);
+      }
+  }
+
+[class*=sidebar-dark-] .sidebar {
+    a {
+      color: $white;
+    }
+  
+    .user-panel .user-link:hover {
+      color: $success;
+    }
+  }
+
+  .imagen-albaran {
+    width:250px;
+    height: 100%;
+  }
+  .admin-image-albaran {
+    position: relative;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    height:250px;
+
+    button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}
+
+.estado {
+  padding:25px;
+  font-size: 2rem;
+  text-transform: uppercase;
+  border: solid 1px #000;
+  margin-bottom: 15px;
+  margin-top: 15px;
+
+  &.entregat {
+    color: green;
+    border-color: green;
+  }
+  &.pendent {
+    border-color: red;
+    color:red;
+  }
+}
+
+.close  {
+  position: absolute;
+  right: 20px !important;
+  top:20px;
+}

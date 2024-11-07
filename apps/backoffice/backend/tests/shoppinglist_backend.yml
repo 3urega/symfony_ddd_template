@@ -1,0 +1,22 @@
+shoppinglist_backend:
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      kernel:
+        class: App\ShoppingList\Backend\ShoppingListBackendKernel
+      bootstrap: apps/bootstrap.php
+    Behat\MinkExtension:
+      sessions:
+        symfony:
+          symfony: ~
+      base_url: ''
+
+  suites:
+    health_check:
+      paths: [ apps/shoppinglist/backend/tests/features/health_check ]
+      contexts:
+        - Tests\Shared\Infrastructure\Behat\ApiContext
+
+    usuario:
+      paths: [ apps/shoppinglist/backend/tests/features/usuario ]
+      contexts:
+        - Tests\Shared\Infrastructure\Behat\ApiContext

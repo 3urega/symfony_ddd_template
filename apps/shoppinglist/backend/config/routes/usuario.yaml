@@ -1,0 +1,14 @@
+usuario_particular_put:
+  path: /usuario/particular/{id}
+  controller: App\ShoppingList\Backend\Controller\Usuario\UsuarioParticularPutController
+  methods: [PUT]
+
+usuario_particular_get:
+  path: /usuario/particular
+  controller: App\ShoppingList\Backend\Controller\Usuario\UsuarioParticularGetController
+  methods: [GET]
+
+usuario_particular_post:
+  path: /usuario/particular
+  controller: App\ShoppingList\Backend\Controller\Usuario\UsuarioParticularPostController
+  methods: [POST]

@@ -1,0 +1,10 @@
+twig:
+    file_name_pattern: '*.twig'
+    default_path: '%kernel.project_dir%/apps/'
+    paths:
+        "%kernel.project_dir%/apps/shoppinglist/frontend/templates": shoppinglist
+        "%kernel.project_dir%/apps/backoffice/frontend/templates": backoffice
+
+when@test:
+    twig:
+        strict_variables: true

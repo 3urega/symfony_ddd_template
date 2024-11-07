@@ -1,0 +1,46 @@
+backoffice_login:
+    path: /login
+    methods: [ GET ]
+    defaults: { _controller: App\Backoffice\Frontend\Controller\Security\LoginController }
+
+api_login_jwt:
+    path: /api/login
+    methods: [ POST ]
+    
+backoffice_logout:
+    path: /logout
+
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+    path: /api/doc.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+shoppinglist_frontend:
+  resource: './../apps/shoppinglist/frontend/config/routes/'
+  type: directory
+  prefix: /frontend
+
+profile:
+  path: /profile
+  defaults: { _controller: App\Backoffice\Frontend\Controller\Security\ProfileGetController }
+  methods: [ GET ]
+
+shoppinglist_backend:
+  resource: './../apps/shoppinglist/backend/config/routes/'
+  type: directory
+  prefix: /shoppinglist
+
+backoffice_frontend:
+  resource: './../apps/backoffice/frontend/config/routes/'
+  type: directory
+  prefix: /backoffice
+
+backoffice_backend:
+  resource: './../apps/backoffice/backend/config/routes/'
+  type: directory
+  prefix: /backoffice-backend

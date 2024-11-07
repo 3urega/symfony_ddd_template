@@ -1,0 +1,47 @@
+doctrine:
+    dbal:
+        override_url: true
+        url: '%env(resolve:DATABASE_URL)%'
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        server_version: '1'
+        
+        types:
+            # General
+            vo_email_address: Eurega\Shared\Infrastructure\ValueObject\Common\EmailAddressType
+            vo_id: Eurega\Shared\Infrastructure\ValueObject\Common\IdType
+            vo_nombre: Eurega\Shared\Infrastructure\ValueObject\Common\NombreType
+            # Security
+            vo_password_hash: Eurega\Shared\Infrastructure\ValueObject\Security\PasswordHashType
+            # Backoffice
+            vo_nombre_producto_backoffice: Eurega\Shared\Infrastructure\ValueObject\Common\NombreType
+    orm:
+        auto_generate_proxy_classes: true
+        default_entity_manager: default
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                connection: default
+                mappings:
+                    Shared\Domain:
+                        type: xml
+                        is_bundle: false
+                        dir: "%kernel.project_dir%/src/Shared/Infrastructure/Persistence/Doctrine/Mapping/Domain"
+                        prefix: Eurega\Shared\Domain
+                        alias: Eurega\Shared\Domain
+
+                    ShoppingList\Domain:
+                        type: xml
+                        is_bundle: false
+                        dir: "%kernel.project_dir%/src/ShoppingList/Infrastructure/Persistence/Doctrine/Mapping/Domain"
+                        prefix: Eurega\ShoppingList\Domain
+                        alias: Eurega\ShoppingList\Domain
+
+                    Backoffice\Domain:
+                        type: xml
+                        is_bundle: false
+                        dir: "%kernel.project_dir%/src/Backoffice/Infrastructure/Persistence/Doctrine/Mapping"
+                        prefix: Eurega\Backoffice\Domain
+                        alias: Eurega\Backoffice\Domain

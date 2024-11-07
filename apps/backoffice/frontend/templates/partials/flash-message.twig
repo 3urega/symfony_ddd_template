@@ -1,0 +1,15 @@
+{% set alertTypeAvaillable = [ 'info', 'success', 'warning', 'danger','request'] %}
+{% if app.session.flashbag is defined %}
+    
+    {% for alertType in alertTypeAvaillable %}
+        {% for flashMessage in app.session.flashbag.get(alertType) %}
+            <div class="col">
+                <div class="mt-4 alert shadow-sm alert-{{ alertType }} fade show{{ alertType == 'success' ? ' text-green' : '' }}">
+                    <i class="icon {% if alertType == 'danger' %} fas fa-exclamation-triangle {% else %} fas fa-check-circle {% endif %}"></i>
+                    &nbsp;<i>{{ flashMessage|raw }}</i>
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

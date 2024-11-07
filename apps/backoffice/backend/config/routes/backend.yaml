@@ -1,0 +1,4 @@
+backoffice_listado_productos_backoffice_ajax:
+    path: /productos_backoffice_list_ajax
+    defaults: { _controller: App\Backoffice\Backend\Controller\ProductoBackoffice\ListadoProductoBackofficeAjaxController }
+    

@@ -1,0 +1,20 @@
+<div class="card shadow-sm card-outline card-primary {{ box_classes|default }}">
+    {% if cardHeader is defined and cardHeader %}
+        <div class="card-header">
+            {% block cardHeader %}
+            {% endblock %}
+        </div>
+    {% endif %}
+
+    <div class="card-body">
+        {% block cardBody %}
+        {% endblock %}
+    </div>
+
+    {% if cardFooter is defined and cardFooter %}
+        <div class="card-footer">
+            {% block cardFooter %}
+            {% endblock %}
+        </div>
+    {% endif %}
+</div>

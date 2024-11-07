@@ -1,0 +1,49 @@
+security:
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        usuario_symfony:
+            id: Eurega\Shared\Infrastructure\Symfony\Security\Provider\UsuarioSymfonyProvider
+    
+    password_hashers:
+        Eurega\Shared\Infrastructure\Symfony\Security\Usuario\SfUsuario:
+            algorithm: bcrypt
+
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        login:
+            pattern: ^/api/login
+            stateless: true
+            provider: usuario_symfony
+            json_login:
+                check_path: /api/login
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        backoffice:
+            lazy: true
+            pattern: ^/backoffice
+            provider: usuario_symfony
+
+            custom_authenticators: 
+                - Eurega\Shared\Infrastructure\Symfony\Security\Authenticator\LoginAuthenticator
+            logout:
+                path:  backoffice_logout
+                target:  backoffice_login
+
+        main:
+            pattern: ^/api
+            stateless: true
+            jwt: ~
+      
+
+    # Easy way to control access for large sections of your site    
+    # Note: Only the *first* access control that matches will be used
+    
+    access_control:
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/backoffice, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/backoffice, roles: IS_AUTHENTICATED_FULLY }

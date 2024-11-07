@@ -1,0 +1,28 @@
+<div class="form-group p-0 mb-3">
+    {% if hidden %}
+    {% else %}
+        <label for="{{ form_input_id }}">{{ form_label }}</label>
+    {% endif %}
+    <div class="custom-file">
+        <input
+            {% if accept %}accept="{{ accept }}"{% endif %}
+            type="file"
+            class="custom-file-input"
+            id="{{ form_input_id }}"
+            name="{{form_input_name}}"
+            {% if multiple %}multiple{% endif %}
+            {% if hidden %}hidden{% endif %}
+        />
+        {% if hidden %}
+        {% else %}
+            <label class="custom-file-label">Subir archivo</label>
+        {% endif %}
+        
+    </div>
+    {% if form_help_block %}
+        <p id="{{ form_input_id }}_help" class="form-text text-muted text-small">{{ form_help_block|raw }}</p>
+    {% endif %}
+    {% if form_input_error %}
+        <p class="error invalid-feedback">{{ form_input_error }}</p>
+    {% endif %}
+</div>

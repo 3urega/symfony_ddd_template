@@ -1,0 +1,10 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Eurega\Shared\Domain;
+
+interface UuidGenerator
+{
+	public function generate(): string;
+}

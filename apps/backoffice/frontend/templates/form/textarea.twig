@@ -1,0 +1,23 @@
+<div class="form-group p-0 mb-3{% if form_input_error %} is-invalid{% endif %}">
+    {% if form_label %}
+        <label for="{{ form_input_id }}">{{ form_label }} {% if required %}<span class="required-label">*</span>{% endif %}</label>
+    {% endif %}
+    <textarea
+        id="{{ form_input_id }}"
+        name="{{ form_input_name }}"
+        class="form-control{% if form_input_error %} is-invalid{% endif %} {{ form_input_extra_classes }}"
+        placeholder="{{ form_input_placeholder }}"
+    {% if readonly %}
+        readonly
+    {% endif %}
+    {% if form_help_block %}
+        aria-describedby="{{ form_input_id }}_help"
+    {% endif %}
+    >{{ form_input_value|default }}</textarea>
+    {% if form_help_block %}
+        <p id="{{ form_input_id }}_help" class="form-text text-muted text-small">{{ form_help_block|raw }}</p>
+    {% endif %}
+    {% if form_input_error %}
+        <p class="error invalid-feedback">{{ form_input_error }}</p>
+    {% endif %}
+</div>

@@ -1,0 +1,58 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+      autowire: true      # Automatically injects dependencies in your services.
+      autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusRead:
+      arguments:
+          - '@tactician.commandbus.read'
+
+  Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusWrite:
+      arguments:
+          - '@tactician.commandbus.write'
+
+  Eurega\ShoppingList\Application\Query\Usuario\:
+      resource: './../../src/ShoppingList/Application/Query/Usuario/**'
+      exclude: './../../src/ShoppingList/Application/Query/Usuario/*Query.php'
+      tags:
+          - { name: tactician.handler, typehints: true }
+      
+  Eurega\ShoppingList\Application\Command\:
+      resource: './../../src/ShoppingList/Application/Command/**'
+      exclude: './../../src/ShoppingList/Application/Command/**/*Command.php'
+      tags:
+        - { name: tactician.handler, typehints: true }
+
+  Eurega\Backoffice\Application\Handler\:
+      resource: './../../src/Backoffice/Application/Handler/**'
+      tags:
+        - { name: tactician.handler, typehints: true }
+
+  Eurega\ShoppingList\Application\Service\:
+    resource: './../../src/ShoppingList/Application/Service/*'
+
+  Eurega\Backoffice\Application\Service\:
+      resource: './../../src/Backoffice/Application/Service/*'
+
+
+  Eurega\Shared\Domain\Repository\:
+    resource: './../../src/Shared/Domain/Repository/*'
+
+  Eurega\Backoffice\Infrastructure\Persistence\Doctrine\QueryBuilder\:
+    resource: './../../src/Backoffice/Infrastructure/Persistence/Doctrine/QueryBuilder/*'
+
+
+  Eurega\Backoffice\Infrastructure\Persistence\Doctrine\Repository\:
+    resource: './../../src/Backoffice/Infrastructure/Persistence/Doctrine/Repository/*'
+
+  Eurega\Shared\Infrastructure\:
+    resource: './../../src/Shared/Infrastructure/*'
+  
+
+  Eurega\Shared\Domain\Repository\Usuario\UsuarioParticularReadRepository : '@Eurega\Shared\Infrastructure\Persistence\Doctrine\Repository\Usuario\UsuarioParticularReadRepository'
+  Eurega\Shared\Domain\Repository\Usuario\UsuarioParticularWriteRepository : '@Eurega\Shared\Infrastructure\Persistence\Doctrine\Repository\Usuario\UsuarioParticularWriteRepository'
+  Eurega\ShoppingList\Domain\Repository\ProductoShoppingList\ProductoShoppingListReadRepository : '@Eurega\ShoppingList\Infrastructure\Persistence\Doctrine\Repository\ProductoShoppingList\ProductoShoppingListReadRepository'
+  Eurega\ShoppingList\Domain\Repository\ProductoShoppingList\ProductoShoppingListWriteRepository : '@Eurega\ShoppingList\Infrastructure\Persistence\Doctrine\Repository\ProductoShoppingList\ProductoShoppingListWriteRepository'
+  
+  Eurega\Shared\Domain\Bus\Event\EventBus: '@Eurega\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus'

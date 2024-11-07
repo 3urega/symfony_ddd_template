@@ -1,0 +1,3 @@
+imports:
+    - { resource: '../../apps/shoppinglist/backend/config/services/' }
+    - { resource: '../../apps/shoppinglist/frontend/config/services/' }

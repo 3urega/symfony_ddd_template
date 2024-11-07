@@ -1,0 +1,13 @@
+
+
+services:
+  _defaults:
+    autoconfigure: true
+    autowire: true
+
+  Eurega\ShoppingList\Infrastructure\Persistence\:
+    resource: '../../../../src/ShoppingList/Infrastructure/Persistence/*'
+    exclude: '../../../../src/ShoppingList/Infrastructure/Persistence/{Doctrine/Mapping,Doctrine/Migrations,Doctrine/ValueObject}'
+
+imports:
+  - { resource: '../../../../config/services/shared.yaml' }

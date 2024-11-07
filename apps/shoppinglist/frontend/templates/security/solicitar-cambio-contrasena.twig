@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/3bcf029b6f.js" crossorigin="anonymous"></script>
+    {{ encore_entry_link_tags('styles/app') }}
+    <title>Solicitar cambio contraseña | {{ app.request.server.get('WEBSITE_TITLE') }}</title>
+</head>
+<body class="login-page">
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <h1 class="h4">Solicitar cambio de contraseña</h1>
+        </div>
+        <div class="card-body">
+            {% if success is defined and success %}
+                <div class="alert alert-success">
+                    Se han enviado las instrucciones al email indicado.
+                </div>
+                <div class="col text-center">
+                    <a href="{{ path('ui_backoffice_usuario_login') }}" class="btn btn-link"><i class="fas fa-arrow-left fa-sm"></i> Volver</a>
+                </div>
+            {% else %}
+                {% if error is defined and error %}
+                    <div class="alert alert-danger">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <p class="login-box-msg">Introduce el email asociado a tu cuenta y te enviaremos las instrucciones para cambiar tu contraseña.</p>
+                {{ backoffice_form_start() }}
+                    {{ backoffice_form_input_text(
+                        request,
+                        '',
+                        'email',
+                        placeholder = 'Correo electrónico',
+                        inputAppend = '<span class="fas fa-envelope"></span>',
+                        type = 'email'
+                    ) }}
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success text-white btn-block">Solicitar</button>
+                        </div>
+                    </div>
+                {{ backoffice_form_end(request) }}
+            {% endif %}
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
+<script>
+    config = {};
+</script>
+{{ encore_entry_script_tags('js/app') }}
+</body>
+</html>

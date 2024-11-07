@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/3bcf029b6f.js" crossorigin="anonymous"></script>
+    {{ encore_entry_link_tags('styles/app') }}
+    <title>Crear contraseña | {{ app.request.server.get('WEBSITE_TITLE') }}</title>
+</head>
+<body class="login-page">
+<div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+            <h1 class="h4">Crear contraseña</h1>
+        </div>
+        <div class="card-body">
+            {% if success is defined and success %}
+                <div class="alert alert-success">
+                    Se ha añadido la contraseña correctamente.
+                </div>
+                <div class="col text-center">
+                    <a href="{{ path('ui_backoffice_usuario_login') }}" class="btn btn btn-link"><i class="fas fa-arrow-left fa-sm"></i> Volver</a>
+                </div>
+            {% elseif not token_valid %}
+                <div class="alert alert-danger">
+                    El enlace no es válido. Vuelve a solicitar un cambio de contraseña para obtener uno nuevo.
+                </div>
+                <div class="col text-center">
+                    <a href="{{ path('ui_backoffice_usuario_login') }}" class="btn btn btn-link"><i class="fas fa-arrow-left fa-sm"></i> Volver</a>
+                </div>
+            {% else %}
+                <p class="login-box-msg">Introduce la contraseña para completar tu registro.</p>
+                {{ backoffice_form_start() }}
+                    {{ backoffice_form_input_text(
+                        request,
+                        '',
+                        'nueva_contrasena',
+                        placeholder = 'Contraseña',
+                        inputAppend = '<span class="fas fa-lock"></span>',
+                        type = 'password'
+                    ) }}
+                    {{ backoffice_form_input_text(
+                        request,
+                        '',
+                        'repetir_contrasena',
+                        placeholder = 'Repetir contraseña',
+                        inputAppend = '<span class="fas fa-lock"></span>',
+                        type = 'password'
+                    ) }}
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success text-white btn-block">Guardar</button>
+                        </div>
+                    </div>
+                {{ backoffice_form_end(request) }}
+            {% endif %}
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</div>
+<!-- /.login-box -->
+<script>
+    config = {};
+</script>
+{{ encore_entry_script_tags('js/app') }}
+</body>
+</html>

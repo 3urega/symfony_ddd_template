@@ -1,0 +1,16 @@
+<div class="custom-control custom-checkbox mt-3 {{ classes }}" id="{{ form_input_id }}_container">
+    <input
+        class="custom-control-input custom-control-input-secondary"
+        type="checkbox"
+        id="{{ form_input_id }}"
+        name="{{ form_input_name }}"
+        value="1"
+        {% if checked %}checked{% endif %}
+        {% if required %}required{% endif %}
+        {% if readonly %}disabled{% endif %}
+    >
+    <label for="{{ form_input_id }}" class="custom-control-label">{{ form_label }}</label>
+    {% if form_input_error %}
+        <p class="error invalid-feedback">{{ form_input_error }}</p>
+    {% endif %}
+</div>

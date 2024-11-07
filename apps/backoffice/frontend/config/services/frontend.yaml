@@ -1,0 +1,27 @@
+imports:
+  - { resource: '../../../../../config/services/shared.yaml' }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Backoffice\Frontend\:
+    resource: '../../src'
+
+  App\Backoffice\Frontend\Controller\:
+      resource: '../../src/Controller/*'
+      tags: ['controller.service_arguments']
+  
+  App\Backoffice\Frontend\Command\:
+      resource: './../../src/Command/**'
+      exclude: './../../src/Command/**/*Command.php'
+      tags:
+        - { name: tactician.handler, typehints: true }
+
+  
+  Eurega\Shared\Domain\Bus\Command\CommandBus: '@Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusWrite'
+  Eurega\Backoffice\Domain\Repository\ProductoBackoffice\ProductoBackofficeWriteRepository: '@Eurega\Backoffice\Infrastructure\Persistence\Doctrine\Repository\ProductoBackoffice\MysqlProductoBackofficeWriteRepository'
+  
+  Eurega\Shared\Domain\Bus\Event\EventBus: '@Eurega\Shared\Infrastructure\Bus\Event\Mysql\MySqlDoctrineEventBus'
+  Eurega\Backoffice\Domain\Repository\ProductoBackoffice\ProductoBackofficeReadRepository: '@Eurega\Backoffice\Infrastructure\Persistence\Doctrine\Repository\ProductoBackoffice\MysqlProductoBackofficeReadRepository'

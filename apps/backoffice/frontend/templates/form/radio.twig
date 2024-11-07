@@ -1,0 +1,13 @@
+<div class="custom-control custom-radio mt-3 {{ classes }}" id="{{ form_input_id }}_container">
+    <input
+        class="custom-control-input custom-control-input-secondary"
+        type="radio"
+        id="{{ form_input_id }}"
+        name="{{ form_input_name }}"
+        value="{{ value }}"
+        {% if checked %}checked{% endif %}
+        {% if required %}required{% endif %}
+        {% if readonly %}disabled{% endif %}
+    >
+    <label for="{{ form_input_id }}" class="custom-control-label">{{ form_label }}</label>
+</div>

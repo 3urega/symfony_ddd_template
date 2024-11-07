@@ -1,0 +1,7 @@
+<button
+    type="submit"
+    name="{{ button_name|default }}"
+    class="btn btn-primary btn-round {{ custom_classes|default }}"
+    id="{{ id|default }}"
+    {% if form_action %}formaction="{{ form_action }}"{% endif %}
+>{% if icon %}<i class="{{ icon }}"></i>{% endif %} {{ label }}</button>

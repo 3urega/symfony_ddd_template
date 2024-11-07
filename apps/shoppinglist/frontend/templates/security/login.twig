@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/3bcf029b6f.js" crossorigin="anonymous"></script>
+    {{ encore_entry_link_tags('styles/app') }}
+    <title>Login | {{ app.request.server.get('WEBSITE_TITLE') }}</title>
+</head>
+<body class="login-page">
+    <div class="login-box">
+        <!-- /.login-logo -->
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <h1 class="h2">{{ app.request.server.get('WEBSITE_TITLE') }}</h1>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Introduce tus credenciales</p>
+                {% if error is defined and error %}
+                    <div class="alert alert-danger">
+                        {{ error.message }}
+                    </div>
+                {% endif %}
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Email" name="_username">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="w-100 text-right text-sm">
+                            {# <a href="{{ path('ui_backoffice_solicitar_cambio_contrasena') }}">Recuperar contraseña</a> #}
+                        </div>
+                        <input type="password" class="form-control" placeholder="Contraseña" name="_password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <div class="custom-control custom-checkbox mt-2">
+                                <input class="custom-control-input custom-control-input-secondary" type="checkbox" name="remember_pass" id="remember_pass">
+                                <label for="remember_pass" class="custom-control-label">Recordar credenciales</label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success text-white btn-block">Entrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.login-box -->
+    <script>
+        config = {};
+    </script>
+    {{ encore_entry_script_tags('app') }}
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@symfony/webpack-encore": "^4.7.0",
+        "core-js": "^3.23.0",
+        "file-loader": "^6.2.0",
+        "moment": "^2.30.1",
+        "npm-run-all": "^4.1.5",
+        "regenerator-runtime": "^0.13.9",
+        "sass": "^1.77.8",
+        "sass-loader": "^14.0.0",
+        "select2": "^4.1.0-rc.0",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-notifier": "^1.15.0",
+        "yarn": "^1.22.22"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "start": "run-p symfony:serve watch",
+        "symfony:serve": "symfony server:start -d",
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress",
+        "test:behat": "./vendor/bin/behat -p shoppinglist_backend",
+        "test:unit": "./vendor/bin/phpunit"
+    },
+    "dependencies": {
+        "admin-lte": "^4.0.0-beta1",
+        "datatables.net-bs4": "^2.1.4",
+        "daterangepicker": "^3.1.0",
+        "sweetalert2": "^11.14.1"
+    }
+}

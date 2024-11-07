@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+    
+
+  App\ShoppingList\Frontend\Controller\:
+      resource: '../../src/Controller/*'
+      tags: ['controller.service_arguments']
+      

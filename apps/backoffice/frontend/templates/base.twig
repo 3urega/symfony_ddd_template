@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('styles/app') }}
+    {% endblock %}
+
+    <title>Eurega</title>
+    <title>Rules</title>
+
+    <script type="text/javascript"> 
+        (function() { 
+            var css = document.createElement('link'); 
+            css.href = 'https://use.fontawesome.com/releases/v5.1.0/css/all.css'; 
+            css.rel = 'stylesheet'; 
+            css.type = 'text/css'; 
+            document.getElementsByTagName('head')[0].appendChild(css); 
+        })(); 
+    </script>
+
+    {% block topJavascripts %}
+        <script>
+            const config = {};
+            config.datatables = {
+                lang: '{{ asset('build/js/vendor/dataTables/ca.json') }}'
+            }
+        </script>
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.ico') }}"/>
+
+</head>
+<body>
+    {% block navbar %} {% endblock %}
+    {% block sidebar %} {% endblock %} 
+
+    <div class="content-wrapper px-4 py-2">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        {{ include('@backoffice/partials/header.html.twig') }}
+                    </div> 
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+        {% include '@backoffice/partials/flash-message.twig' %}
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        {% block main %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    
+{{ include('@backoffice/partials/footer.html.twig') }}
+
+{% block bottomJavascripts %}            
+{# {{ encore_entry_script_tags('js/app') }} #}
+{% endblock %}
+
+</body>
+</html>

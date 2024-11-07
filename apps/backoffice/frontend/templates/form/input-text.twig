@@ -1,0 +1,39 @@
+<div class="form-group p-0 mb-3">
+    {% if form_label is not empty %}<label for="{{ form_input_id }}">{{ form_label }} {% if required %}<span class="required-label">*</span>{% endif %}</label>{% endif %}
+    <div class="input-group">
+        <input
+            type="{{ form_input_type }}"
+            class="form-control{% if form_input_error %} is-invalid{% endif %} {{ form_input_extra_classes }}"
+            name="{{ form_input_name }}"
+            id="{{ form_input_id }}"
+            value="{{ form_input_value }}"
+            autocomplete="off"
+            {% if form_help_block %}
+                aria-describedby="{{ form_input_id }}_help"
+            {% endif %}
+            placeholder="{{ form_input_placeholder }}"
+            {% if required %}required{% endif %}
+            {% if min is defined and min is not null %}
+                min="{{ min }}"
+            {% endif %}
+            {% if max is defined and max is not null %}
+                max="{{ max }}"
+            {% endif %}
+            {% if decimals is defined and decimals %}
+                step=".01"
+            {% endif %}
+            {% if readonly %}readonly{% endif %}
+        >
+        {% if input_append %}
+            <div class="input-group-append">
+                <div class="input-group-text">{{ input_append|raw }}</div>
+            </div>
+        {% endif %}
+    </div>
+    {% if form_help_block %}
+        <p id="{{ form_input_id }}_help" class="form-text text-muted text-small">{{ form_help_block|raw }}</p>
+    {% endif %}
+    {% if form_input_error %}
+        <p class="error invalid-feedback" style="display:block">{{ form_input_error }}</p>
+    {% endif %}
+</div>

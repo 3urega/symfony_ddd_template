@@ -1,0 +1,125 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    ### Shopping List >>>
+
+    Eurega\ShoppingList\Domain\:
+        resource: '../src/ShoppingList/Domain/*'
+
+    Eurega\ShoppingList\Application\:
+        resource: '../src/ShoppingList/Application/*'
+
+    Eurega\ShoppingList\Infrastructure\:
+        resource: '../src/ShoppingList/Infrastructure/*'
+        exclude: '../src/ShoppingList/Infrastructure/Persistence/{Doctrine/Mapping, Doctrine/Migrations}'
+
+    Eurega\ShoppingList\Infrastructure\Command\:
+        resource: '../src/ShoppingList/Infrastructure/Command/*'
+
+    Eurega\ShoppingList\Infrastructure\Fixtures\:
+        resource: '../src/ShoppingList/Infrastructure/Fixtures/*'
+
+    Eurega\ShoppingList\Domain\Repository\:
+        resource: '../src/ShoppingList/Domain/Repository/'
+
+    Eurega\ShoppingList\Application\Query\Usuario\:
+        resource: './../src/ShoppingList/Application/Query/Usuario/**'
+        tags:
+            - { name: tactician.handler, typehints: true }
+        
+    Eurega\ShoppingList\Application\Handler\:
+        resource: './../src/ShoppingList/Application/Handler/**'
+        tags:
+            - { name: tactician.handler, typehints: true }
+    
+    ### Shopping List <<<
+
+    Eurega\Shared\:
+        resource: '../src/Shared/*'
+        
+    Eurega\Shared\Infrastructure\Symfony\Security\:
+        resource: '../src/Shared/Infrastructure/Symfony/Security'
+        exclude: '../src/Shared/Infrastructure/Symfony/Security/User'
+
+    Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusRead:
+        arguments:
+            - '@tactician.commandbus.read'
+
+    Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusWrite:
+        arguments:
+            - '@tactician.commandbus.write'
+
+    Eurega\Shared\Application\Handler\:
+        resource: './../src/Shared/Application/Handler/**'
+        tags:
+            - { name: tactician.handler, typehints: true }
+
+    Eurega\Shared\Domain\Repository\:
+        resource: './../src/Shared/Domain/Repository/**'
+
+    # -- TAGGING --
+    Eurega\Shared\Infrastructure\Bus\Event\InMemory\InMemorySymfonyEventBus:
+        arguments: [!tagged eurega.domain_event_subscriber]
+        lazy: true
+
+    Eurega\Shared\Infrastructure\Bus\Event\DomainEventMapping:
+        arguments: [!tagged eurega.domain_event_subscriber]
+
+    Eurega\Shared\Infrastructure\Bus\Event\DomainEventSubscriberLocator:
+        arguments: [!tagged eurega.domain_event_subscriber]
+    # Configure
+    _instanceof:
+        Eurega\Shared\Domain\Bus\Event\DomainEventSubscriber:
+            tags: ['eurega.domain_event_subscriber']
+
+    Eurega\Shared\Infrastructure\Symfony\Request\FrontendRequestResolver:
+        class: Eurega\Shared\Infrastructure\Symfony\Request\FrontendRequestResolver
+        arguments:
+            - '@validator'
+        tags:
+            - { name: controller.request_value_resolver, priority: 50 }
+    
+    
+    Eurega\Shared\Infrastructure\Symfony\Middleware\AddJsonBodyToRequestListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    Eurega\Shared\Infrastructure\Symfony\Middleware\ApiExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onException }
+
+    #Eurega\Shared\Infrastructure\Symfony\Logger\CorrelationIdProcessor:
+        #tags:
+            #- {name: monolog.processor}
+
+    #Eurega\Shared\Infrastructure\Symfony\Middleware\BasicHttpAuthMiddleware:
+        #tags:
+            #- { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    ## Aliases
+    Eurega\Shared\Domain\Bus\Command\CommandBusWrite: '@Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusWrite'
+    Eurega\Shared\Domain\Bus\Command\CommandBusRead: '@Eurega\Shared\Infrastructure\Bus\Command\Tactician\TacticianCommandBusRead'
+    Eurega\Shared\Domain\Repository\Usuario\UsuarioAdministradorReadRepository: '@Eurega\Shared\Infrastructure\Persistence\Doctrine\Repository\Usuario\UsuarioAdministradorReadRepository'
+    Eurega\Shared\Domain\Repository\Usuario\UsuarioParticularWriteRepository: '@Eurega\Shared\Infrastructure\Persistence\Doctrine\Repository\Usuario\MysqlUsuarioParticularWriteRepository'
+    Eurega\Shared\Domain\Repository\Usuario\UsuarioParticularReadRepository: '@Eurega\Shared\Infrastructure\Persistence\Doctrine\Repository\Usuario\UsuarioParticularReadRepository'
+    Eurega\Shared\Domain\Repository\Usuario\UsuarioAdministradorWriteRepository: '@Eurega\Shared\Infrastructure\Persistence\Doctrine\Repository\Usuario\UsuarioAdministradorWriteRepository'
+
+
+        
+imports:
+    - { resource: 'services/app_shoppinglist.yaml' }
+    - { resource: 'services/app_backoffice.yaml' }

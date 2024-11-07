@@ -1,0 +1,19 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\ShoppingList\Backend\:
+    resource: '../../src'
+  
+  App\ShoppingList\Backend\Controller\:
+    resource: '../../src/Controller'
+    tags: ['controller.service_arguments']
+
+  Eurega\Shared\Domain\RandomNumberGenerator: '@App\ShoppingList\Backend\Test\ConstantRandomNumberGenerator'
+  Eurega\Shared\Domain\Bus\Event\EventBus: '@Eurega\Shared\Infrastructure\Bus\Event\Mysql\MySqlDoctrineEventBus'
+
+
+  
+
+    

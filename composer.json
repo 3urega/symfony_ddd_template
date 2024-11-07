@@ -1,0 +1,130 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.0",
+        "doctrine/dbal": "^3",
+        "doctrine/doctrine-bundle": "^2.12",
+        "doctrine/doctrine-migrations-bundle": "^3.3",
+        "doctrine/orm": "^3.2",
+        "lambdish/phunctional": "^2.1",
+        "league/tactician": "^1.1",
+        "league/tactician-bundle": "^1.5",
+        "league/tactician-doctrine": "^1.2",
+        "lexik/jwt-authentication-bundle": "^3.1",
+        "nelmio/api-doc-bundle": "^4.32",
+        "phpdocumentor/reflection-docblock": "^5.4",
+        "phpstan/phpdoc-parser": "^1.29",
+        "ramsey/uuid": "^4.7",
+        "ramsey/uuid-doctrine": "^2.1",
+        "symfony/asset": "7.1.*",
+        "symfony/asset-mapper": "7.1.*",
+        "symfony/console": "7.1.*",
+        "symfony/doctrine-messenger": "7.1.*",
+        "symfony/dotenv": "7.1.*",
+        "symfony/expression-language": "7.1.*",
+        "symfony/flex": "^2",
+        "symfony/form": "7.1.*",
+        "symfony/framework-bundle": "7.1.*",
+        "symfony/http-client": "7.1.*",
+        "symfony/intl": "7.1.*",
+        "symfony/mailer": "7.1.*",
+        "symfony/messenger": "7.1.*",
+        "symfony/mime": "7.1.*",
+        "symfony/monolog-bundle": "^3.0",
+        "symfony/notifier": "7.1.*",
+        "symfony/process": "7.1.*",
+        "symfony/property-access": "7.1.*",
+        "symfony/property-info": "7.1.*",
+        "symfony/runtime": "7.1.*",
+        "symfony/security-bundle": "7.1.*",
+        "symfony/serializer": "7.1.*",
+        "symfony/stimulus-bundle": "^2.18",
+        "symfony/string": "7.1.*",
+        "symfony/translation": "7.1.*",
+        "symfony/twig-bundle": "7.1.*",
+        "symfony/ux-turbo": "^2.18",
+        "symfony/validator": "7.1.*",
+        "symfony/web-link": "7.1.*",
+        "symfony/webpack-encore-bundle": "^2.1",
+        "symfony/yaml": "7.1.*",
+        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/twig": "^2.12|^3.0",
+        "web-token/jwt-bundle": "^4.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Eurega\\": ["src"],
+
+            "Tests\\Shared\\": "tests/Shared",
+
+            "App\\ShoppingList\\Backend\\": "apps/shoppinglist/backend/src",
+            "App\\ShoppingList\\Frontend\\": "apps/shoppinglist/frontend/src",
+
+            "App\\Backoffice\\Backend\\": "apps/backoffice/backend/src",
+            "App\\Backoffice\\Frontend\\": "apps/backoffice/frontend/src"
+        }
+    },
+    "replace": {
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "symfony/polyfill-php82": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "importmap:install": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "7.1.*"
+        }
+    },
+    "require-dev": {
+        "behat/behat": "^3.13",
+        "friends-of-behat/mink-extension": "2.7.5",
+        "friends-of-behat/symfony-extension": "2.6.0",
+        "behat/mink-browserkit-driver": "2.2.0",
+
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "fakerphp/faker": "^1.23",
+        "mockery/mockery": "^1.6",
+        "phpunit/phpunit": "^11",
+        "symfony/browser-kit": "7.1.*",
+        "symfony/css-selector": "7.1.*",
+        "symfony/debug-bundle": "7.1.*",
+        "symfony/maker-bundle": "^1.0",
+        "symfony/phpunit-bridge": "^7.1",
+        "symfony/stopwatch": "7.1.*",
+        "symfony/web-profiler-bundle": "7.1.*",
+        "zenstruck/foundry": "^2.0"
+    }
+}

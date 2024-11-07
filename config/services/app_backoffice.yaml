@@ -1,0 +1,3 @@
+imports:
+    - { resource: '../../apps/backoffice/backend/config/services/' }
+    - { resource: '../../apps/backoffice/frontend/config/services/' }

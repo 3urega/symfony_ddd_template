@@ -1,0 +1,44 @@
+lexik_jwt_authentication:
+    secret_key: '%kernel.project_dir%/config/jwt/private.pem' # path to the secret key OR raw secret key, required for creating tokens
+    public_key: '%kernel.project_dir%/config/jwt/public.pem'  # path to the public key OR raw public key, required for verifying tokens
+    pass_phrase: '078e239e4411e05994de631f36aaed0b' # required for creating tokens
+    
+    token_extractors:
+        authorization_header:
+                enabled: true
+                prefix:  Bearer
+                name:    Authorization
+                
+        cookie:
+            enabled: false
+            name:    BEARER
+
+        # check token in query string parameter
+        query_parameter:
+            enabled: false
+            name:    bearer
+
+        # check token in a cookie
+        split_cookie:
+            enabled: false
+            cookies:
+                - jwt_hp
+                - jwt_s
+    # token encoding/decoding settings
+    encoder:
+        # token encoder/decoder service - default implementation based on the lcobucci/jwt library
+        service:            lexik_jwt_authentication.encoder.lcobucci
+
+        # encryption algorithm used by the encoder service
+        signature_algorithm: RS256
+
+        # check token in a cookie
+       
+
+    # remove the token from the response body when using cookies
+    remove_token_from_body_when_cookies_used: true
+
+    # invalidate the token on logout by storing it in the cache
+    blocklist_token:
+        enabled: true
+        cache: cache.app

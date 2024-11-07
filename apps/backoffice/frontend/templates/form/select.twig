@@ -1,0 +1,35 @@
+<div class="form-group p-0 mb-3{% if form_input_error %} is-invalid{% endif %}">
+    <label for="{{ form_input_id }}">{{ form_label }} {% if required %}<span class="required-label">*</span>{% endif %}</label>
+    <select class="form-control{% if form_input_error %} is-invalid{% endif %} {{ form_input_extra_classes }}"
+        name="{{ form_input_name }}{{ multiple ? '[]' : '' }}"
+        id="{{ form_input_id }}"
+        {% if form_help_block %}
+            aria-describedby="{{ form_input_id }}_help"
+        {% endif %}
+        {% if required %}required{% endif %}
+        {% if readonly %}disabled{% endif %}
+        {% if multiple %}multiple="multiple" data-placeholder="{{ form_input_placeholder|default('Selecciona una opción') }}"{% endif %}
+    >
+        {% if not multiple %}
+            <option value=""></option>
+            {% for option in options %}
+                <option value="{{ option.value }}"
+                        {% if form_input_value == option.value %}selected{% endif %}
+                >{{ option.text }}</option>
+            {% endfor %}
+        {% else %}
+            {% for option in options %}
+                <option value="{{ option.value }}"
+                        {% if option.value in form_input_value %}selected{% endif %}
+                >{{ option.text }}</option>
+            {% endfor %}
+        {% endif %}
+
+    </select>
+    {% if form_help_block %}
+        <p id="{{ form_input_id }}_help" class="form-text text-muted text-small">{{ form_help_block }}</p>
+    {% endif %}
+    {% if form_input_error %}
+        <p class="error invalid-feedback">{{ form_input_error }}</p>
+    {% endif %}
+</div>
